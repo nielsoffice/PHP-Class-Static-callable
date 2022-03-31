@@ -71,6 +71,73 @@ Function my_cb_function() {
 }
 Call_user_func('my_cb_function');
 
+// Call back usage 2
+function designer_say( $designer_says ) {
+    echo $designer_says; // print people_say
+}
+
+function team_says( $people, $call_back_func, $people_say ) {
+    
+    echo $people .' saying : ' ;
+    call_user_func( $call_back_func, $people_say );
+
+}
+
+team_says( 'Dev Team ', 'designer_say', 'Great!' );
+// output:
+# Dev Team saying : Great!;
+
+// Call back usage 3
+function team_says_new( $people, $call_back_func, $people_say ) {
+    
+    echo $people .' saying : ' ;
+    $call_back_func(  $people_say );
+
+}
+
+team_says_new( 'Dev Team ', 'designer_say', 'Great!' );
+// output:
+# Dev Team saying : Great!;
+
+# Call back usage 4 array
+function foo($instrument) {
+     
+    return "Nikki like playing instrument " . $instrument;
+
+}
+
+echo call_user_func_array('foo',['durms']);
+// output: 
+# Nikki like playing instrument drums;
+
+// Usage: callable function through Static Class
+Class ClassArray {
+
+    function my_cb_method($instrument) {
+      
+       return "Nikki like playing instrument " . $instrument;
+
+   }
+  
+  }
+ // usage:
+ echo call_user_func_array(['ClassArray','my_cb_method'],['drums']);
+// output: 
+# Nikki like playing instrument drums;
+
+ Class StaticClassArray {
+
+    static function my_cb_method($instrument) {
+      
+       return "Nikki like playing instrument " . $instrument;
+
+   }
+  
+  }
+ echo call_user_func_array([\Test\StaticClassArray::class,'my_cb_method'],['drums']);
+// output: 
+# Nikki like playing instrument drums;
+
 // Usage: callable function through Static Class
 Class StaticClass {
 
